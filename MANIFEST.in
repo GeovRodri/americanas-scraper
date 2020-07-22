@@ -1,5 +1,5 @@
 include README.md
 include MANIFEST.in
 include setup.py
-include scripts/zapimoveis
+include scripts/americanas
 include requirements.txt
