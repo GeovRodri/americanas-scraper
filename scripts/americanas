@@ -19,7 +19,7 @@ class BannerHelpFormatter(IndentedHelpFormatter):
 formatter = BannerHelpFormatter(
     "Americanas crawler and scraper using beautifulsoup4\n"
     "By Geovany Rodrigues\n"
-    "https://github.com/GeovRodri/zapimoveis-scraper\n"
+    "https://github.com/GeovRodri/americanas-scraper\n"
 )
 
 parser = OptionParser(formatter=formatter)

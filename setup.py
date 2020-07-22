@@ -43,10 +43,10 @@ metadata = dict(
     packages=['americanas_scraper'],
     scripts=[join('scripts', 'americanas')],
     version="0.2.1",
-    description="ZAP Imóveis crawler and scraper using beautifulsoup4",
+    description="Americanas crawler and scraper using beautifulsoup4",
     author="Geovany Rodrigues",
     author_email="geovanyscv@gmail.com",
-    url='https://github.com/GeovRodri/zapimoveis-scraper',
+    url='https://github.com/GeovRodri/americanas-scraper',
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
