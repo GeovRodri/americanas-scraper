@@ -46,31 +46,43 @@ def get_page(url):
     return response
 
 
-def __get_text(element, content=False):
-    if element is not None:
-        if content is False:
-            return element.getText()
-        else:
-            return element.get("content")
-
-    return ''
-
-
-def search(url='https://www.americanas.com.br/categoria/celulares-e-smartphones/smartphone/', num_pages=0):
-    items = []
+def search(url=''):
+    products = []
     last_page = False
+    page = 1
 
-    html = get_page(url)
-    soup = BeautifulSoup(html, 'html.parser')
+    while not last_page:
+        print(f'Processing page {page}')
+        page_url = url
+        if page > 1:
+            page_url += f'/pagina-{page}'
 
-    products_cards = soup.find_all(attrs={"class": "product-grid-item"})
-    if len(products_cards) == 0:
-        last_page = True
+        html = get_page(page_url)
+        soup = BeautifulSoup(html, 'html.parser')
 
-    for product_card in products_cards:
-        product_url = product_card.find('a')
-        items.append(product_url.attrs['href'])
+        products_cards = soup.find_all(attrs={"class": "product-grid-item"})
+        if len(products_cards) == 0:
+            last_page = True
 
-    return items
+        for product_card in products_cards:
+            product_url = product_card.find('a')
+            product_url = product_url.attrs['href']
 
-search()
+            product = {
+                'Nome': product_card.find('h2').text
+            }
+
+            product_html = get_page('https://www.americanas.com.br' + product_url)
+            product_soup = BeautifulSoup(product_html, 'html.parser')
+
+            about = product_soup.find('table')
+            rows = about.find_all('tr')
+            for row in rows:
+                cols = row.find_all('td')
+                product[cols[0].text.strip()] = cols[1].text.strip()
+
+            products.append(product)
+
+        page += 1
+
+    return products
