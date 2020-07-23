@@ -47,7 +47,6 @@ def get_page(url):
 
 
 def search(url=''):
-    products = []
     last_page = False
     page = 1
 
@@ -81,8 +80,6 @@ def search(url=''):
                 cols = row.find_all('td')
                 product[cols[0].text.strip()] = cols[1].text.strip()
 
-            products.append(product)
+            yield product
 
         page += 1
-
-    return products
